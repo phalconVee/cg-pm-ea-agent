@@ -1,0 +1,10 @@
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: fit-content;
+  max-width: 80%;
+  height: auto;
+  flex-shrink: 0;
+}

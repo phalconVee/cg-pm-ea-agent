@@ -1,0 +1,36 @@
+.suggestion-chips {
+  display: flex;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.suggestion-chip {
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 1px solid #0073C5;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0073C5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestion-chip:hover {
+  background-color: #e6f3ff;
+  border-color: #005a9e;
+  color: #005a9e;
+  transform: translateY(-1px);
+}
+
+.suggestion-chip:active {
+  transform: translateY(0);
+  background-color: #cce7ff;
+}

@@ -1,0 +1,8 @@
+.chat-thread {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}

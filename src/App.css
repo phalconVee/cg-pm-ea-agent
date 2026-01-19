@@ -1,0 +1,56 @@
+.app {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #fafafa;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 240px;
+  margin-right: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #ffffff;
+  transition: margin-right 0.3s ease-in-out;
+}
+
+.main-content.drawer-open {
+  margin-right: 400px; /* 400px (drawer width) */
+}
+
+/* Mobile Responsive - Adjust main content when sidebar is hidden */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .main-content.drawer-open {
+    margin-right: 0;
+  }
+
+  .mobile-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    animation: fadeIn 0.3s ease-in-out;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

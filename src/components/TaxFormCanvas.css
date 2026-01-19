@@ -1,0 +1,632 @@
+.tax-form-canvas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #f5f5f5;
+  overflow-y: auto;
+}
+
+/* Top Header */
+.canvas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.mobile-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #333333;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.mobile-hamburger:hover {
+  background-color: #f5f5f5;
+}
+
+.header-left {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+}
+
+.refund-summary,
+.due-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.refund-label,
+.due-label {
+  font-size: 12px;
+  color: #666666;
+  font-weight: 500;
+}
+
+.refund-amount.positive {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00a86b;
+}
+
+.due-amount.negative {
+  font-size: 16px;
+  font-weight: 600;
+  color: #d32f2f;
+}
+
+.header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.nav-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #0073C5;
+  cursor: pointer;
+}
+
+.nav-link {
+  font-weight: 500;
+}
+
+.nav-arrow {
+  font-size: 18px;
+}
+
+.progress-steps {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.progress-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.progress-step::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: #e5e5e5;
+  z-index: 0;
+}
+
+.progress-step:last-child::after {
+  display: none;
+}
+
+.progress-step.completed::after {
+  background-color: #00a86b;
+}
+
+.step-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #e5e5e5;
+  border: 2px solid #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-step.completed .step-indicator {
+  background-color: #00a86b;
+}
+
+.progress-step span {
+  font-size: 12px;
+  color: #666666;
+  font-weight: 500;
+}
+
+.progress-step.completed span {
+  color: #00a86b;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: #666666;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.icon-button:hover {
+  background-color: #f5f5f5;
+  color: #1a1a1a;
+}
+
+.live-advice-button {
+  padding: 8px 16px;
+  background-color: #0073C5;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.live-advice-button:hover {
+  background-color: #005a9e;
+}
+
+.time-estimate {
+  font-size: 12px;
+  color: #666666;
+}
+
+/* Main Content */
+.canvas-content {
+  flex: 1;
+  padding: 48px 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.refund-confirmation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  margin-bottom: 32px;
+  background-color: #ffffff;
+  padding: 48px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.refund-content {
+  flex: 1;
+}
+
+.refund-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.refund-subtitle {
+  font-size: 16px;
+  color: #666666;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.explain-refund-button {
+  padding: 12px 24px;
+  background-color: transparent;
+  color: #000000;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(to right, rgba(255, 0, 0, 0.4), rgba(255, 127, 0, 0.4), rgba(255, 255, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 0, 255, 0.4), rgba(75, 0, 130, 0.4), rgba(148, 0, 211, 0.4)) border-box;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.explain-refund-button:hover {
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(to right, rgba(255, 0, 0, 0.4), rgba(255, 127, 0, 0.4), rgba(255, 255, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 0, 255, 0.4), rgba(75, 0, 130, 0.4), rgba(148, 0, 211, 0.4)) border-box;
+  color: #000000;
+}
+
+.refund-illustration {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.money-stack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.money-bill {
+  position: absolute;
+  width: 120px;
+  height: 60px;
+  background: linear-gradient(135deg, #00a86b 0%, #00c97a 100%);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 168, 107, 0.3);
+}
+
+.money-bill:nth-child(1) {
+  bottom: 0;
+  z-index: 1;
+  transform: rotate(-2deg);
+}
+
+.money-bill:nth-child(2) {
+  bottom: 8px;
+  z-index: 2;
+  transform: rotate(1deg);
+}
+
+.money-bill:nth-child(3) {
+  bottom: 16px;
+  z-index: 3;
+  transform: rotate(-1deg);
+}
+
+.stack-top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.dollar-coin {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #0073C5;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 115, 197, 0.3);
+}
+
+.calculator-icon {
+  font-size: 24px;
+}
+
+.arrow-down {
+  font-size: 20px;
+  color: #0073C5;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* Detailed View Section */
+.detailed-view-section {
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.detailed-view-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.detailed-view-toggle:hover {
+  background-color: #f5f5f5;
+}
+
+.toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.calculator-icon-small {
+  font-size: 18px;
+  color: #666666;
+  flex-shrink: 0;
+}
+
+.toggle-chevron {
+  font-size: 12px;
+  color: #666666;
+  transition: transform 0.2s ease;
+}
+
+.toggle-chevron.expanded {
+  transform: rotate(180deg);
+}
+
+.detailed-view-content {
+  padding: 24px;
+  border-top: 1px solid #e5e5e5;
+  font-size: 14px;
+  color: #666666;
+}
+
+/* Payment Plan Info */
+.payment-plan-info {
+  background-color: #ffffff;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 32px;
+}
+
+.mobile-continue-button-container {
+  display: none;
+}
+
+.payment-plan-link {
+  color: #0073C5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.payment-plan-link:hover {
+  text-decoration: underline;
+}
+
+/* Bottom Navigation */
+.canvas-footer {
+  background-color: #ffffff;
+  border-top: 1px solid #e5e5e5;
+  padding: 16px 32px 40px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+}
+
+.back-button {
+  padding: 10px 20px;
+  background: none;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.back-button:hover {
+  background-color: #f5f5f5;
+  border-color: #b0b0b0;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.footer-links a {
+  color: #666666;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #0073C5;
+  text-decoration: underline;
+}
+
+.continue-button {
+  padding: 10px 24px;
+  background-color: #0073C5;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.continue-button:hover {
+  background-color: #005a9e;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .canvas-header {
+    padding: 12px 16px;
+    justify-content: space-between;
+  }
+
+  .mobile-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Hide header-left content (refund summary) on mobile, but keep hamburger visible */
+  .header-left {
+    display: flex;
+    gap: 0;
+  }
+
+  .header-left .refund-summary,
+  .header-left .due-summary {
+    display: none;
+  }
+
+  /* Hide header-center (progress steps) on mobile */
+  .header-center {
+    display: none;
+  }
+
+  /* Hide time estimate on mobile */
+  .time-estimate {
+    display: none;
+  }
+
+  /* Hide live advice button on mobile, keep only icon buttons */
+  .live-advice-button {
+    display: none;
+  }
+
+  /* Adjust header icons for mobile */
+  .header-right {
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-icons {
+    gap: 8px;
+  }
+
+  /* Adjust main content padding for mobile */
+  .canvas-content {
+    padding: 24px 16px;
+  }
+
+  /* Adjust refund confirmation for mobile */
+  .refund-confirmation {
+    flex-direction: column;
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .refund-title {
+    font-size: 24px;
+  }
+
+  .refund-subtitle {
+    font-size: 14px;
+  }
+
+  .refund-illustration {
+    display: none;
+  }
+
+  /* Show mobile continue button in main canvas */
+  .mobile-continue-button-container {
+    display: block;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  .mobile-continue-button-container .continue-button {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 16px;
+  }
+
+  /* Hide desktop continue button in footer on mobile */
+  .desktop-continue {
+    display: none;
+  }
+
+  /* Adjust footer for mobile */
+  .canvas-footer {
+    padding: 12px 16px 32px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 12px;
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .copyright {
+    position: static;
+    transform: none;
+    order: 4;
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+  }
+}
