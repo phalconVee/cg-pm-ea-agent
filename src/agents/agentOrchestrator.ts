@@ -121,7 +121,7 @@ export class AgentOrchestrator {
 
       if (shouldStream) {
         // Add message to state first with empty content
-        if (onStreamUpdate) {
+        if (onStreamUpdate && typeof onStreamUpdate === 'function') {
           taxState.addMessage(systemMessage);
         }
 

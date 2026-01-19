@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, KeyboardEvent } from 'react';
 import { Message } from '../types';
-import { taxState } from '../state/taxState';
 import MessageBubble from './MessageBubble';
 import TypingIndicator from './TypingIndicator';
 import './OutcomeChatBottomSheet.css';
@@ -31,7 +30,6 @@ const OutcomeChatBottomSheet: React.FC<OutcomeChatBottomSheetProps> = ({
   const isDragging = useRef<boolean>(false);
   const [input, setInput] = useState('');
   const [sheetHeight, setSheetHeight] = useState<number>(0);
-  const [hasExpanded, setHasExpanded] = useState<boolean>(false);
 
   // Bottom sheet states: CLOSED → PARTIAL_LOADING → FULL_READY → CLOSED
   const PARTIAL_LOADING_HEIGHT = window.innerHeight * 0.35; // 35% of viewport
@@ -56,7 +54,6 @@ const OutcomeChatBottomSheet: React.FC<OutcomeChatBottomSheetProps> = ({
   // Reset state when sheet closes
   useEffect(() => {
     if (!isOpen) {
-      setHasExpanded(false);
       setSheetHeight(0);
     }
   }, [isOpen]);
@@ -76,7 +73,6 @@ const OutcomeChatBottomSheet: React.FC<OutcomeChatBottomSheetProps> = ({
         sheetRef.current.style.minHeight = `${PARTIAL_LOADING_HEIGHT}px`;
       } else if (isFullReadyState) {
         // FULL_READY state: 95% viewport height
-        setHasExpanded(true);
         setSheetHeight(FULL_READY_HEIGHT);
         sheetRef.current.style.height = `${FULL_READY_HEIGHT}px`;
         sheetRef.current.style.maxHeight = `${FULL_READY_HEIGHT}px`;

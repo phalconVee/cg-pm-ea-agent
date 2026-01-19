@@ -16,7 +16,6 @@ import { agentOrchestrator } from '../agents/agentOrchestrator';
  */
 export class DemoMode {
   private isRunning: boolean = false;
-  private stepIndex: number = 0;
 
   /**
    * Initialize demo state
@@ -45,7 +44,6 @@ export class DemoMode {
     if (this.isRunning) return;
     
     this.isRunning = true;
-    this.stepIndex = 0;
     
     // Initialize state
     this.initializeDemoState();
@@ -92,7 +90,6 @@ export class DemoMode {
   private async step3_SuggestInvestments(): Promise<void> {
     // The explanation agent should suggest reviewing investments
     // But we can also add a follow-up message
-    const state = taxState.getTaxpayerState();
     
     // Add a message suggesting to review investments
     taxState.addMessage({
@@ -118,8 +115,6 @@ export class DemoMode {
     if (taxState.taxpayerState.errors.length > 0) {
       taxState.removeError(taxState.taxpayerState.errors[0]);
     }
-    
-    const updatedState = taxState.getTaxpayerState();
     
     // Update refund (adding 1099-DIV might increase refund)
     taxState.updateRefund(350);
@@ -196,7 +191,6 @@ export class DemoMode {
    */
   reset(): void {
     this.isRunning = false;
-    this.stepIndex = 0;
   }
 }
 

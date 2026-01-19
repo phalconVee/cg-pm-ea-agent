@@ -1,7 +1,7 @@
-import { AgentResponse, AgentType, Intent, ActionButton } from '../types';
+import { AgentResponse, Intent, ActionButton } from '../types';
 import { taxState } from '../state/taxState';
 import { monetizationAgent } from './monetizationAgent';
-import { shouldUseWebSearch, simulateWebSearch } from '../tools/webSearchSimulator';
+import { shouldUseWebSearch } from '../tools/webSearchSimulator';
 
 /**
  * Executive Chat Agent
@@ -77,7 +77,7 @@ export const executiveAgent = {
 /**
  * Infer user intent using simple rule-based logic
  */
-function inferIntent(message: string, state: any): Intent | null {
+function inferIntent(message: string, _state: any): Intent | null {
   // EXPLAIN: Questions about tax concepts
   if (
     message.match(/\b(why|what is|what's|how does|how do|explain|tell me about|what does)\b/i) ||
@@ -135,7 +135,7 @@ function inferIntent(message: string, state: any): Intent | null {
 /**
  * Handle EXPLAIN intent - Route to explanation agent
  */
-function handleExplainIntent(message: string): AgentResponse {
+function handleExplainIntent(_message: string): AgentResponse {
   return {
     content: "I'd be happy to explain that for you. Let me get you the information you need.",
     agentType: 'executive',
@@ -147,7 +147,7 @@ function handleExplainIntent(message: string): AgentResponse {
 /**
  * Handle ADD_FORM intent - Extract form name and add it
  */
-function handleAddFormIntent(message: string, state: any): AgentResponse {
+function handleAddFormIntent(message: string, _state: any): AgentResponse {
   // Extract form name from message
   const formName = extractFormName(message);
   
@@ -209,7 +209,7 @@ function handleReviewStatusIntent(state: any): AgentResponse {
 /**
  * Handle OPTIMIZE intent - Route to deductions or investments agent
  */
-function handleOptimizeIntent(message: string, state: any): AgentResponse {
+function handleOptimizeIntent(message: string, _state: any): AgentResponse {
   // Determine if it's about deductions or investments
   if (
     message.includes('deduct') ||

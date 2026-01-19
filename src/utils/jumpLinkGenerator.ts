@@ -10,7 +10,6 @@ export function generateJumpLinks(
   const links: JumpLink[] = [];
   const content = messageContent.toLowerCase();
   const hasW2Data = taxpayerState.w2Data.length > 0;
-  const hasPriorYearData = (taxpayerState as any).hasPriorYearData === true;
 
   // Missing W-2 data
   if (content.includes('w-2') || content.includes('w2') || content.includes('wage') || content.includes('income')) {

@@ -4,7 +4,7 @@ import { taxState } from '../state/taxState';
 export const explanationAgent = {
   async process(
     message: string,
-    taxpayerState: TaxpayerState
+    _taxpayerState: TaxpayerState
   ): Promise<AgentResponse> {
     const lowerMessage = message.toLowerCase();
     const state = taxState.getTaxpayerState();

@@ -9,19 +9,17 @@ import NavigationScreen from './components/NavigationScreen';
 import { Message, JumpLink, TurboTaxScreen } from './types';
 import { taxState } from './state/taxState';
 import { geminiService } from './services/geminiService';
-import { demoMode } from './demo/demoMode';
 import { generateW2Data, calculateRefundFromW2 } from './utils/w2DataGenerator';
 import { streamText } from './utils/streamText';
 import { generateJumpLinks } from './utils/jumpLinkGenerator';
 import './App.css';
 
 const App: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [_messages, setMessages] = useState<Message[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [isDemoRunning, setIsDemoRunning] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
-  const [conversations, setConversations] = useState(taxState.getConversations());
-  const [currentConversationId, setCurrentConversationId] = useState<string | null>(
+  const [_conversations, setConversations] = useState(taxState.getConversations());
+  const [_currentConversationId, setCurrentConversationId] = useState<string | null>(
     taxState.getCurrentConversationId()
   );
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -31,7 +29,6 @@ const App: React.FC = () => {
     context?: string;
     returnMessageId?: string;
   } | null>(null);
-  const [previousSuggestions, setPreviousSuggestions] = useState<Set<string>>(new Set());
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -66,20 +63,6 @@ const App: React.FC = () => {
 
     return unsubscribe;
   }, []);
-
-  const handleNewConversation = () => {
-    taxState.createConversation();
-    setMessages([]);
-    setIsUploadModalOpen(false);
-  };
-
-  const handleSelectConversation = (id: string) => {
-    taxState.switchConversation(id);
-  };
-
-  const handleDeleteConversation = (id: string) => {
-    taxState.deleteConversation(id);
-  };
 
   const handleSendMessage = async (userMessage: string) => {
     if (isProcessing) return;
@@ -167,7 +150,7 @@ const App: React.FC = () => {
           content: errorContent,
           timestamp: new Date(),
           isStreaming: false,
-          jumpLinks: generateJumpLinks(errorContent, taxpayerState),
+          jumpLinks: generateJumpLinks(errorContent, taxState.getTaxpayerState()),
         }]);
       } else {
         // Update existing message
@@ -179,7 +162,7 @@ const App: React.FC = () => {
               ...updated[index],
               content: errorContent,
               isStreaming: false,
-              jumpLinks: generateJumpLinks(errorContent, taxpayerState),
+              jumpLinks: generateJumpLinks(errorContent, taxState.getTaxpayerState()),
             };
           }
           return updated;
@@ -338,23 +321,7 @@ const App: React.FC = () => {
     }
   };
 
-  const handleStartDemo = async () => {
-    if (isDemoRunning || isProcessing) return;
-    
-    setIsDemoRunning(true);
-    setIsProcessing(true);
-    
-    try {
-      await demoMode.runDemo();
-    } catch (error) {
-      console.error('Error running demo:', error);
-    } finally {
-      setIsDemoRunning(false);
-      setIsProcessing(false);
-    }
-  };
-
-  const handleW2UploadComplete = async (file: File) => {
+  const handleW2UploadComplete = async (_file: File) => {
     // Generate mock W-2 data
     const existingW2Count = taxState.getW2Data().length;
     const w2Data = generateW2Data(existingW2Count);
@@ -423,7 +390,7 @@ const App: React.FC = () => {
           }
           
           taxState.updateMessage(messageId, {
-            actions,
+            actions: actions as import('./types').ActionButton[],
             isStreaming: false,
           });
         }
@@ -449,7 +416,7 @@ const App: React.FC = () => {
     setCurrentNavigationScreen(null);
   };
 
-  const handleNavigationComplete = async (screen: TurboTaxScreen, data?: any) => {
+  const handleNavigationComplete = async (screen: TurboTaxScreen, _data?: any) => {
     // Close navigation screen
     setCurrentNavigationScreen(null);
     
@@ -467,7 +434,7 @@ const App: React.FC = () => {
     
     // Update completion percentage
     if (currentState.completionPercentage < 100) {
-      taxState.updateCompletionPercentage(Math.min(100, currentState.completionPercentage + 10));
+      taxState.setCompletionPercentage(Math.min(100, currentState.completionPercentage + 10));
     }
     
     // Wait a moment then auto-update explanation
@@ -513,7 +480,7 @@ const App: React.FC = () => {
           isOpen={isDrawerOpen}
           messages={drawerMessages}
           onActionClick={handleActionClick}
-          isProcessing={isProcessing || isDemoRunning}
+          isProcessing={isProcessing}
           onClose={() => setIsDrawerOpen(false)}
           onSendMessage={handleSendMessage}
           onJumpLinkClick={handleJumpLinkClick}
@@ -526,7 +493,7 @@ const App: React.FC = () => {
           isOpen={isDrawerOpen}
           messages={drawerMessages}
           onActionClick={handleActionClick}
-          isProcessing={isProcessing || isDemoRunning}
+          isProcessing={isProcessing}
           onClose={() => setIsDrawerOpen(false)}
           onSendMessage={handleSendMessage}
           onJumpLinkClick={handleJumpLinkClick}

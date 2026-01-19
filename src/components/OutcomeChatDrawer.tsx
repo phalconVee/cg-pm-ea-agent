@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState, KeyboardEvent, useMemo } from 'react';
+import React, { useEffect, useRef, useState, KeyboardEvent } from 'react';
 import { Message } from '../types';
-import { taxState } from '../state/taxState';
 import MessageBubble from './MessageBubble';
 import TypingIndicator from './TypingIndicator';
 import './OutcomeChatDrawer.css';
@@ -26,17 +25,6 @@ const OutcomeChatDrawer: React.FC<OutcomeChatDrawerProps> = ({
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [input, setInput] = useState('');
-  
-  // Track previous suggestions from all system messages
-  const previousSuggestions = useMemo(() => {
-    return messages
-      .filter(m => m.role === 'system')
-      .flatMap(m => {
-        // Extract suggestions that might have been shown
-        // This is a simple approach - in a real app, you'd track this more explicitly
-        return [];
-      });
-  }, [messages]);
 
   useEffect(() => {
     if (isOpen && messagesEndRef.current) {

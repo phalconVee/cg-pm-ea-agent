@@ -1,5 +1,4 @@
 import { AgentResponse, TaxpayerState } from '../types';
-import { taxState } from '../state/taxState';
 
 export const investmentsAgent = {
   async process(

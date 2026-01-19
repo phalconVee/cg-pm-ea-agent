@@ -6,7 +6,7 @@ interface SidebarProps {
   onMobileClose?: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isMobileOpen = false, onMobileClose }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isMobileOpen = false, onMobileClose: _onMobileClose }) => {
   return (
     <>
       <aside className={`sidebar ${isMobileOpen ? 'mobile-open' : ''}`}>

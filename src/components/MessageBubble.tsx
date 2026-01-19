@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Message, ActionButton, SearchResult, JumpLink } from '../types';
+import { Message, SearchResult, JumpLink } from '../types';
 import { taxState } from '../state/taxState';
 import SuggestionChips from './SuggestionChips';
 import JumpLinkButton from './JumpLinkButton';
@@ -19,7 +19,6 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   showSuggestions = false,
   onSuggestionClick,
   onJumpLinkClick,
-  previousSuggestions = [],
 }) => {
   const isUser = message.role === 'user';
   const [dismissed, setDismissed] = useState(false);
@@ -81,7 +80,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
               lastMessage={message.content}
               taxpayerState={taxState.getTaxpayerState()}
               onChipClick={onSuggestionClick}
-              previousSuggestions={previousSuggestions}
+              previousSuggestions={[]}
             />
           )}
           {/* Jump link appears on the same line */}

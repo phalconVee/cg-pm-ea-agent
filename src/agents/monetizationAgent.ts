@@ -16,7 +16,7 @@ export const monetizationAgent = {
    * Returns a suggestion if appropriate, null otherwise
    */
   async checkOpportunity(
-    userMessage: string,
+    _userMessage: string,
     intent: Intent | null,
     taxStateParam: TaxpayerState
   ): Promise<MonetizationSuggestion | null> {

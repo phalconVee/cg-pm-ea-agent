@@ -1,4 +1,4 @@
-import { Message, TaxpayerState, FilingStatus, ConfidenceLevel, W2Data, Conversation } from '../types';
+import { Message, TaxpayerState, FilingStatus, W2Data, Conversation } from '../types';
 
 // Simple client-side state management
 class TaxState {
@@ -352,6 +352,15 @@ class TaxState {
     const calculated = Math.min(100, Math.max(0, formWeight - errorPenalty));
     this.taxpayerState.completionPercentage = calculated;
     this.updateConfidenceLevel();
+  }
+
+  /**
+   * Set completion percentage directly (public method)
+   */
+  setCompletionPercentage(percentage: number): void {
+    this.taxpayerState.completionPercentage = Math.min(100, Math.max(0, percentage));
+    this.updateConfidenceLevel();
+    this.saveCurrentConversation();
   }
 
   /**
